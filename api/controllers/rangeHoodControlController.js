@@ -63,9 +63,6 @@ exports.fan_speed = function(req, res) {
      console.log('Fan Unknown State');
      res.json('Fan Speed Unknown State');
   }
-
-  doubleButtonPress(gpio1, gpio4);
-  res.json('fan speed 1');
 };
 
 exports.light = function(req, res) {
