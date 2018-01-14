@@ -92,8 +92,8 @@ function doubleButtonPress(pin_1, pin_2) {
 }
 
 function singleButtonPress(pin) {
-  pin.write(1); // write 1 to pin 5
-  pin.write(0); // write 0 to pin 5
+  pin.write(0); // write 1 to pin 5
+  pin.write(1); // write 0 to pin 5
   console.log('Emulate Button Press');
 }
 
