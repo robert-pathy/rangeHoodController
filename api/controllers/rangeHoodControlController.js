@@ -1,12 +1,12 @@
 'use strict';
 
 const Gpio = require('orange-pi-gpio');
-let gpio1 = new Gpio({pin:1, mode: 'out'}); // Range Hood Power Button
-let gpio4 = new Gpio({pin:4, mode: 'out'}); // Range Hood Speed 1 Button
-let gpio5 = new Gpio({pin:5, mode: 'out'}); // Range Hood Speed 2 Button
-let gpio11 = new Gpio({pin:11, mode: 'out'}); // Range Hood Speed 3 Button
-let gpio22 = new Gpio({pin:22, mode: 'out'}); // Range Hood Speed 4 Button
-let gpio23 = new Gpio({pin:23, mode: 'out'}); // Range Hood Light Button
+let gpio1 = new Gpio({pin:1, mode: 'out', ready: ()=>{gpio1.write(1)}}); // Range Hood Power Button
+let gpio4 = new Gpio({pin:4, mode: 'out', ready: ()=>{gpio4.write(1)}}); // Range Hood Speed 1 Button
+let gpio5 = new Gpio({pin:5, mode: 'out', ready: ()=>{gpio5.write(1)}}); // Range Hood Speed 2 Button
+let gpio11 = new Gpio({pin:11, mode: 'out', ready: ()=>{gpio11.write(1)}}); // Range Hood Speed 3 Button
+let gpio22 = new Gpio({pin:22, mode: 'out', ready: ()=>{gpio22.write(1)}}); // Range Hood Speed 4 Button
+let gpio23 = new Gpio({pin:23, mode: 'out', ready: ()=>{gpio23.write(1)}}); // Range Hood Light Button
 
 //TODO: Add Variable to track fan state. Q: Are variables in NodeJS persistant through requests? 
 //TODO: Remove states from Lights as they are state less. E: Unless we want to add inteligent state tracking to prevent duplicate command exec.
@@ -92,8 +92,12 @@ function doubleButtonPress(pin_1, pin_2) {
 }
 
 function singleButtonPress(pin) {
-  pin.write(0); // write 1 to pin 5
-  pin.write(1); // write 0 to pin 5
-  console.log('Emulate Button Press');
+
+pin.write(0); // write 1 to pin 5
+  setTimeout(function() {
+    pin.write(1); // write 1 to pin 5
+  }, 500);
+
+    console.log('Emulate Button Press');
 }
 
